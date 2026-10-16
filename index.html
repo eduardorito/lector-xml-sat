@@ -245,12 +245,11 @@
             <p class="text-xs text-slate-600">Sube tus archivos de factura o metadatos para iniciar la lectura e inspección de integridad.</p>
         </section>
 
-        <!-- BANNER DE ANUNCIOS DE GOOGLE ADSENSE -->
+        <!-- BANNER DE ANUNCIOS DE GOOGLE ADSENSE (AJUSTADO PARA AUTO ADS O BLOQUE MANUAL) -->
         <section class="glass-panel rounded-2xl p-4 text-center overflow-hidden min-h-[90px] flex items-center justify-center">
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-8697334409468964"
-                 data-ad-slot="1234567890"
                  data-ad-format="auto"
                  data-full-width-responsive="true"></ins>
             <script>
@@ -532,7 +531,6 @@
             const lines = txtText.split(/\r?\n/);
             if (lines.length < 2) return;
 
-            // Recorrer desde la línea 1 omitiendo encabezados
             for (let i = 1; i < lines.length; i++) {
                 const line = lines[i].trim();
                 if (!line) continue;
@@ -608,7 +606,7 @@
             if (xmlDoc.getElementsByTagName("parsererror").length > 0) return null;
 
             const root = xmlDoc.documentElement;
-            if (!root.nodeName.includes('Comprobante')) return null;
+            if (!root.localName.includes('Comprobante') && !root.nodeName.includes('Comprobante')) return null;
 
             const getAttr = (node, attrName) => node ? (node.getAttribute(attrName) || '') : '';
 
